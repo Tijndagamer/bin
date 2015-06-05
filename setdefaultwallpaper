@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo `feh --bg-scale /home/martijn/Pictures/Wallpapers/10.jpg`

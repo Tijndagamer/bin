@@ -1,0 +1,27 @@
+#!/usr/bin/python
+
+# Import
+import os
+import RemoveAllChars
+
+# Global vars
+tempCrit = 750
+tempWarn = 650
+
+# Get the data
+rawData = os.popen("sensors | grep 'Physical id 0:'").read()
+data = rawData.replace('\n', '')
+data = data.replace('+', '')
+dataList = data.split(' ')
+
+# Print final temp
+print("CPU: " + dataList[4] + "\n")
+
+# Remove all the non-int characters from dataList[4]
+onlyInts = RemoveAllChars.OnlyInts(dataList[4])
+
+# Print colors if needed
+if int(onlyInts) > tempWarn and int(onlyInts) < tempCrit:
+    print("#FFC00")
+elif int(onlyInts) > tempCrit:
+    print("#FF000")

@@ -1,0 +1,18 @@
+#!/usr/bin/python
+
+import os
+import time
+
+def PrintTemp():
+    print(os.popen("date").read()[3 : 18])
+    print(os.popen("sensors | grep 'Core 0'").read()[0 : 24])
+    print(os.popen("sensors | grep 'Core 1'").read()[0 : 24])
+    print(os.popen("sensors | grep 'Core 2'").read()[0 : 24])
+    print(os.popen("sensors | grep 'Core 3'").read()[0 : 24])
+
+try:
+    while True:
+        PrintTemp()
+        time.sleep(1)
+except:
+    pass

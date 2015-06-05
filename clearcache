@@ -1,0 +1,5 @@
+#!/usr/bin/python
+
+import os
+
+os.popen("sudo sh -c 'echo 1 > /proc/sys/vm/drop_caches'")

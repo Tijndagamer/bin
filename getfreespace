@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+import os
+
+rawData = os.popen("df -h /").read()
+
+dataList = rawData.split(' ')
+print(dataList[25] + " Free\n")
+
+if int(dataList[25].replace('G', '')) < 10:
+    print("#FF000")

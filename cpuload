@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+# Import
+import os
+
+coreCount = 4.00 # Change this if your pc doesn't have 4 cores.
+
+rawData = os.popen("uptime").read()
+data = rawData.replace('\n', '')
+data = data.replace(',', '.')
+dataList = data.split(' ')
+
+loadAverage15Min = float(dataList[len(dataList)-1])
+usagePercentage = (loadAverage15Min / coreCount) * 100
+
+print("CPU load: " + str(usagePercentage) + "%")

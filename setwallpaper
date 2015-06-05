@@ -1,0 +1,9 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+try:
+    os.popen("feh --bg-scale " + sys.argv[1])
+except:
+    print("Problem with setting wallpaper. Try again")
