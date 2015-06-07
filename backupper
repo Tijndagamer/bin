@@ -4,5 +4,5 @@ while :
 do
     echo `backup`
     echo "Sleeping"
-    sleep 108000
+    sleep 10800
 done
