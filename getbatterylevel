@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+import os
+
+# Get the data and remove all the things we don't need
+rawData = os.popen("upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage").read()
+data = rawData.replace('\n', '')
+dataList = data.split(' ')
+
+# Print it out
+print(dataList[len(dataList) - 1] + "\n")
+
+onlyInts = dataList[len(dataList)-1].replace('%','')
+
+if onlyInts < 16:
+    print("#FF000")

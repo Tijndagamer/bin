@@ -3,6 +3,7 @@
 # Import
 import os
 
+mode = 1 # 15 for 15-minute average, 5 for 5 minute average and 1 for 1 minute average. when unknown it'll do 15 minute
 coreCount = 4.00 # Change this if your pc doesn't have 4 cores.
 
 rawData = os.popen("uptime").read()
@@ -10,7 +11,19 @@ data = rawData.replace('\n', '')
 data = data.replace(',', '.')
 dataList = data.split(' ')
 
-loadAverage15Min = float(dataList[len(dataList)-1])
-usagePercentage = (loadAverage15Min / coreCount) * 100
+#print str(dataList)
+
+if mode == 15:
+     loadAverage = float(dataList[len(dataList)-1])
+elif mode == 5:
+     loadAverage = dataList[len(dataList)-2]
+     loadAverage = loadAverage[:-1]
+elif mode == 1:
+     loadAverage = dataList[len(dataList)-3]
+     loadAverage = loadAverage[:-1]
+else:
+     loadAverage = float(dataList[len(dataList)-1])
+
+usagePercentage = (float(loadAverage) / coreCount) * 100
 
 print("CPU load: " + str(usagePercentage) + "%")

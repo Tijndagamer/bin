@@ -4,16 +4,19 @@
 etc_backup_dir="file:///mnt/hdd1/Backup/Server/etc"
 home_backup_dir="file:///mnt/hdd1/Backup/Server/home"
 site_backup_dir="file:///mnt/hdd1/Backup/Server/www"
+logs_backup_dir="file:///mnt/hdd1/Backup/Server/logs"
 
 # The dirs to be backed up
 etc_dir="/etc"
 home_dir="/home"
 site_dir="/var/www"
+logs_dir="/var/log"
 
 # Actually doing the backing up
 sudo duplicity incr $etc_dir $etc_backup_dir --no-encryption --volsize 1024
 sudo duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 1024
 sudo duplicity incr $site_dir $site_backup_dir --no-encryption --volsize 1024
+sudo duplicity incr $logs_dir $logs_backup_dir --no-encryption --volsize 1024
 
 # First time
 #echo `sudo duplicity full $etc_dir $etc_backup_dir --no-encryption --volsize 1024`

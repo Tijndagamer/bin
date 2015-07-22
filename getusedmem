@@ -1,0 +1,26 @@
+#!/usr/bin/python
+
+# Import
+import os
+import RemoveAllChars
+
+# Get raw data and strip all the useless shit
+rawData = os.popen("free -h").read()
+data = rawData.replace('\n', '')
+dataList = data.split(' ')
+
+#print(str(dataList))
+
+# Get usedMem
+usedMem = dataList[98]
+
+# Print it
+print(usedMem + "B RAM used\n")
+
+# Check if we have to add a color to it
+
+#print(len(usedMem))
+
+usedMemOnlyInts = RemoveAllChars.OnlyInts(usedMem)
+
+#if usedMemOnlyInts > 6 and 

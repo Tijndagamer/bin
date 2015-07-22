@@ -15,13 +15,15 @@ data = data.replace('+', '')
 dataList = data.split(' ')
 
 # Print final temp
-print("CPU: " + dataList[4] + "\n")
+#print("CPU: " + dataList[4] + "\n")
+print("CPU: " + dataList[4])
 
+# Uncomment for i3blocks usage
 # Remove all the non-int characters from dataList[4]
-onlyInts = RemoveAllChars.OnlyInts(dataList[4])
+#onlyInts = RemoveAllChars.OnlyInts(dataList[4])
 
 # Print colors if needed
-if int(onlyInts) > tempWarn and int(onlyInts) < tempCrit:
-    print("#FFC00")
-elif int(onlyInts) > tempCrit:
-    print("#FF000")
+#if int(onlyInts) > tempWarn and int(onlyInts) < tempCrit:
+#    print("#FFC00")
+#elif int(onlyInts) > tempCrit:
+#    print("#FF000")

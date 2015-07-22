@@ -1,0 +1,8 @@
+#!/usr/bin/python
+
+from os import popen
+from time import sleep
+
+while True:
+    popen("/home/server/bin/backup")
+    sleep(3600)

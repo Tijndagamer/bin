@@ -1,0 +1,23 @@
+#!/usr/bin/python
+
+import os
+
+# Get the battery percentage
+rawData = os.popen("upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage").read()
+data = rawData.replace('\n', '')
+dataList = data.split(' ')
+
+# Get the battery status
+rawData = os.popen("upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state").read()
+rawData = rawData.replace('\n', '')
+dataList2 = rawData.split(' ')
+
+if dataList2[len(dataList2)-1] == "discharging":
+    print(dataList[len(dataList)-1] + "(bat)\n")
+else:
+    print(dataList[len(dataList)-1] + " (AC)\n")
+
+onlyInts = dataList[len(dataList)-1].replace('%','')
+
+if onlyInts < 16:
+    print("#FF000")
