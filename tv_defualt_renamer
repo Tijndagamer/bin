@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+import os
+import time
+
+dir = raw_input("dir = ")
+sep = raw_input("seperator = ")
+index = int(raw_input("index = "))
+extension = raw_input("ext = ")
+
+filenames = os.listdir(dir)
+
+for filename in filenames:
+    splitName = filename.split(sep)
+    print(filename + "         " + dir + "/" + splitName[index] + extension)
+    os.rename(filename, dir + "/" + splitName[index] + extension)
+    time.sleep(0.5)

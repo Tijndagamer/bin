@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+import os
+from time import sleep
+
+print("Renamer for ee.ext format")
+dir = raw_input("dir = ")
+season = raw_input("season = ")
+
+filenames = os.listdir(dir)
+
+for filename in filenames:
+    newFileName = "S" + season + "E" + filename
+    print(filename + "              " + dir + "/" + newFileName)
+    os.rename(filename, dir + "/" + newFileName)
+    sleep(0.5)
