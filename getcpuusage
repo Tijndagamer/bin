@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+import re
+from os import popen
+
+cpu_usage_crit = 85.0
+cpu_usage_warn = 55.0
+
+# Basically the whole program, or at least the important bit.
+raw_data = popen('mpstat 1 1').read()
+p = re.compile("\d+,\d+")
+results = p.findall(raw_data)
+cpu_usage = 100.0 - float(results[len(results) - 1].replace(',','.'))
+print(str(cpu_usage) + "%\n")
+
+# Add colors for i3blocks
+if cpu_usage >= cpu_usage_crit:
+    print("#FF0000") # Red
+elif cpu_usage >= cpu_usage_warn and cpu_usage < cpu_usage_crit:
+    print("#FFCC00") # Orange
+else:
+    print("#00CC00") # Green
