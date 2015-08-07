@@ -2,7 +2,7 @@
 
 while :
 do
-    echo `/home/martijn/bin/backup`
+    echo `backup`
     echo "Sleeping"
     sleep 10800
 done

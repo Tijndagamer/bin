@@ -1,11 +1,30 @@
 #!/usr/bin/python
 
 import os
+import re
 
-rawData = os.popen("df -h /").read()
+free_space_crit = 10
+free_space_warn = 50
 
-dataList = rawData.split(' ')
-print(dataList[25] + " Free\n")
+# Get the raw data and split everything
+raw_data = os.popen("df -h /").read()
+data_list = raw_data.split(' ')
 
-if int(dataList[25].replace('G', '')) < 10:
-    print("#FF000")
+# Use a regex to only have digit*,digit*G
+p = re.compile('\d*,?\d+G')
+results = p.findall(str(data_list))
+
+# Print results
+print(results[len(results) - 1] + "\n")
+
+# Use a regex to only have digits in the results
+q = re.compile('\d+')
+result_int = q.findall(results[len(results) - 1])
+
+# Add colors for i3blocks
+if result_int > free_space_warn:
+    print("#00CC00") # Green
+elif result_int <= free_space_warn and resultint > free_space_crit:
+    print("#FFCC00") # Orange
+elif result_int <= free_space_crit:
+    print("#FF0000") # Red

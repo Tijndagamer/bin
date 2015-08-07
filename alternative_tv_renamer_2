@@ -11,6 +11,7 @@ filenames = os.listdir(dir)
 
 for filename in filenames:
     newFileName = "S" + season + "E" + filename
+#    newFileName = "S" + season + filename
     print(filename + "              " + dir + "/" + newFileName)
     os.rename(filename, dir + "/" + newFileName)
     sleep(0.5)

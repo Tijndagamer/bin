@@ -12,12 +12,24 @@ rawData = os.popen("upower -i /org/freedesktop/UPower/devices/battery_BAT0 | gre
 rawData = rawData.replace('\n', '')
 dataList2 = rawData.split(' ')
 
-if dataList2[len(dataList2)-1] == "discharging":
+charging_state_str = dataList2[len(dataList2) - 1]
+charging_state = False
+
+if charging_state_str == "discharging":
+    charging_state = False
+else:
+    charging_state = True
+
+if charging_state == False:
     print(dataList[len(dataList)-1] + "(bat)\n")
 else:
     print(dataList[len(dataList)-1] + " (AC)\n")
 
-onlyInts = dataList[len(dataList)-1].replace('%','')
+level_int = int(dataList[len(dataList)-1].replace('%',''))
 
-if onlyInts < 16:
+if level_int < 16 and charging_state == False:
     print("#FF000")
+elif level_int > 39 and charging_state == False or charging_state == True:
+    print("#00CC00")
+elif level_int > 15 and level_int < 40 and charging_state == False:
+    print("#FFCC00")

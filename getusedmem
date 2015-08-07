@@ -2,25 +2,28 @@
 
 # Import
 import os
-import RemoveAllChars
+import re
 
-# Get raw data and strip all the useless shit
-rawData = os.popen("free -h").read()
-data = rawData.replace('\n', '')
-dataList = data.split(' ')
+total_ram = 4.0 # In GB
+ram_usage_crit = total_ram - 0.5
+ram_usage_warn = total_ram - 2
 
-#print(str(dataList))
+raw_data = os.popen("free -h").read()
+data_list = raw_data.split(' ')
+p = re.compile('\d*,?\d+[BKMG]')
+results = p.findall(str(data_list))
+#print str(results)
 
-# Get usedMem
-usedMem = dataList[98]
+print(results[len(results) - 5] + " RAM used\n")
 
-# Print it
-print(usedMem + "B RAM used\n")
+q = re.compile('\d+,?\d+')
+digits_only = q.match(results[len(results) - 5]).group()
+result_float = float(digits_only.replace(',','.'))
 
-# Check if we have to add a color to it
-
-#print(len(usedMem))
-
-usedMemOnlyInts = RemoveAllChars.OnlyInts(usedMem)
-
-#if usedMemOnlyInts > 6 and 
+# Add colors for i3blocks
+if result_float >= ram_usage_crit and result_float < total_ram:
+    print("#FF0000") # Red
+elif result_float >= ram_usage_warn and result_float < ram_usage_crit:
+    print("#FFCC00") # Orange
+else:
+    print("#00CC00") # Green

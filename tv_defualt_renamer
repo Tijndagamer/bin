@@ -11,7 +11,9 @@ extension = raw_input("ext = ")
 filenames = os.listdir(dir)
 
 for filename in filenames:
-    splitName = filename.split(sep)
+    filenameProg = filename.replace('s', 'S')
+    filenameProg = filenameProg.replace('e', 'E')
+    splitName = filenameProg.split(sep)
     print(filename + "         " + dir + "/" + splitName[index] + extension)
     os.rename(filename, dir + "/" + splitName[index] + extension)
     time.sleep(0.5)
