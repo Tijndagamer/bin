@@ -7,13 +7,16 @@ import socket
 serverip = "8.8.8.8"
 
 def is_connected_wan():
-    raw_data = os.popen("ping -c 1 " + serverip + " | grep -P '\d received'").read()
-    p = re.compile('\d received')
-    result = p.findall(raw_data)
+    try:
+        raw_data = os.popen("ping -c 1 " + serverip + " | grep -P '\d received'").read()
+        p = re.compile('\d received')
+        result = p.findall(raw_data)
 
-    if result[len(result) - 1] == '1 received':
-        return True
-    else:
+        if result[len(result) - 1] == '1 received':
+            return True
+        else:
+            return False
+    except:
         return False
 
 if is_connected_wan() == True:

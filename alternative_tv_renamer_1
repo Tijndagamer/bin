@@ -3,7 +3,7 @@
 import os
 from time import sleep
 
-print("Renamer for [sxee] format")
+print("Renamer for [sxee].ext format")
 dir = raw_input("dir = ")
 sep = raw_input("seperator (the x in [sxee]) = ")
 season = raw_input("season (the s in [sxee]) = ")
