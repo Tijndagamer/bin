@@ -1,22 +1,25 @@
 #!/bin/bash
 
 # The backup locations
-etc_backup_dir="file:///mnt/hdd1/Backup/Server/etc"
-home_backup_dir="file:///mnt/hdd1/Backup/Server/home"
-site_backup_dir="file:///mnt/hdd1/Backup/Server/www"
+etc_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/etc"
+home_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/home"
+#site_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/www"
+log_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/logs"
 
 # The dirs to be backed up
 etc_dir="/etc"
-home_dir="/home"
-site_dir="/var/www"
+home_dir="/home/martijn"
+#site_dir="/var/www"
+log_dir="/var/log"
 
 # Actually doing the backing up
-sudo duplicity incr $etc_dir $etc_backup_dir --no-encryption --volsize 1024
-sudo duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 1024
-sudo duplicity incr $site_dir $site_backup_dir --no-encryption --volsize 1024
+duplicity incr $etc_dir $etc_backup_dir --no-encryption --volsize 1024
+duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 1024
+#duplicity incr $site_dir $site_backup_dir --no-encryption --volsize 1024
+sudo duplicity incr $log_dir $log_backup_dir --no-encryption --volsize 1024
 
 # First time
 #echo `sudo duplicity full $etc_dir $etc_backup_dir --no-encryption --volsize 1024`
 #echo `sudo duplicity full $home_dir $home_backup_dir --no-encryption --volsize 1024`
 #echo `sudo duplicity full $site_dir $site_backup_dir --no-encryption --volsize 1024`
-
+#echo `sudo duplicity full $log_dir $log_backup_dir --no-encryption --volsize 1024`

@@ -4,7 +4,7 @@
 import os
 import re
 
-total_ram = 4.0 # In GB
+total_ram = 8.0 # In GB
 ram_usage_crit = total_ram - 0.5
 ram_usage_warn = total_ram - 2
 
