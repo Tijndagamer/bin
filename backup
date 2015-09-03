@@ -16,7 +16,7 @@ log_dir="/var/log"
 duplicity incr $etc_dir $etc_backup_dir --no-encryption --volsize 1024
 duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 1024
 #duplicity incr $site_dir $site_backup_dir --no-encryption --volsize 1024
-sudo duplicity incr $log_dir $log_backup_dir --no-encryption --volsize 1024
+duplicity incr $log_dir $log_backup_dir --no-encryption --volsize 1024
 
 # First time
 #echo `sudo duplicity full $etc_dir $etc_backup_dir --no-encryption --volsize 1024`
