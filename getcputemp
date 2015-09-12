@@ -4,28 +4,28 @@
 from os import popen
 from RemoveAllChars import OnlyInts
 
-tempCrit = 750
-tempWarn = 550
-tempCold = 400
+temp_crit = 750
+temp_warn = 550
+temp_cold = 400
 
 # Get the data
-rawData = popen("sensors | grep 'Physical id 0:'").read()
-data = rawData.replace('\n', '')
+raw_data = popen("sensors | grep 'Physical id 0:'").read()
+data = raw_data.replace('\n', '')
 data = data.replace('+', '')
-dataList = data.split(' ')
+data_list = data.split(' ')
 
 # Print final temp
-print("CPU: " + dataList[4] + "\n")
+print("CPU: " + data_list[4] + "\n")
 
 # Remove all the non-int characters from dataList[4]
-onlyInts = int(OnlyInts(dataList[4]))
+temp = int(OnlyInts(data_list[4]))
 
 # Add colors for i3blocks
-if onlyInts >= tempWarn and onlyInts < tempCrit:
+if temp >= temp_warn and temp < temp_crit:
     print("#FFCC00") # Orange
-elif onlyInts >= tempCrit:
+elif temp >= temp_crit:
     print("#FF000") # Red
-elif onlyInts <= tempCold:
+elif temp <= temp_cold:
     print("#0000FF") # Blue
 else:
     print("#00CC00") # Green
