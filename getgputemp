@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+import re
+from os import popen
+
+#degree_symbol = u"\u00b0"
+degree_symbol = " "
+#degree_symbol = u"\u2103"
+temp_warn = 90
+temp_crit = 75
+temp_cold = 50
+
+raw_data = popen("nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader").read()
+temp = raw_data.replace('\n','')
+
+print("GPU: " + temp + ".0" + degree_symbol + "C\n")
+
+temp = int(temp)
+
+# Add colors for i3blocks
+if temp >= temp_warn and temp < temp_crit:
+    print("#FFCC00") # Orange
+elif temp >= temp_crit:
+    print("#FF000") # Red
+elif temp <= temp_cold:
+    print("#0000FF") # Blue
+else:
+    print("#00CC00") # Green

@@ -19,7 +19,7 @@ duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 1024
 duplicity incr $log_dir $log_backup_dir --no-encryption --volsize 1024
 
 # First time
-#echo `sudo duplicity full $etc_dir $etc_backup_dir --no-encryption --volsize 1024`
-#echo `sudo duplicity full $home_dir $home_backup_dir --no-encryption --volsize 1024`
-#echo `sudo duplicity full $site_dir $site_backup_dir --no-encryption --volsize 1024`
-#echo `sudo duplicity full $log_dir $log_backup_dir --no-encryption --volsize 1024`
+#duplicity full $etc_dir $etc_backup_dir --no-encryption --volsize 1024
+#duplicity full $home_dir $home_backup_dir --no-encryption --volsize 1024
+#duplicity full $site_dir $site_backup_dir --no-encryption --volsize 1024`
+#duplicity full $log_dir $log_backup_dir --no-encryption --volsize 1024
