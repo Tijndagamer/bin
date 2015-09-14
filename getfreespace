@@ -4,7 +4,7 @@ import os
 import re
 
 free_space_crit = 10
-free_space_warn = 50
+free_space_warn = 30
 
 # Get the raw data and split everything
 raw_data = os.popen("df -h /").read()
@@ -15,7 +15,7 @@ p = re.compile('\d*,?\d+G')
 results = p.findall(str(data_list))
 
 # Print results
-print(results[len(results) - 1] + "\n")
+print(results[len(results) - 1] + " free\n")
 
 # Use a regex to only have digits in the results
 q = re.compile('\d+')

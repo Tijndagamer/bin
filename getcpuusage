@@ -11,7 +11,7 @@ raw_data = popen('mpstat 1 1').read()
 p = re.compile("\d+,\d+")
 results = p.findall(raw_data)
 cpu_usage = 100.0 - float(results[len(results) - 1].replace(',','.'))
-print(str(cpu_usage) + "%\n")
+print("CPU util: " + str(cpu_usage) + "%\n")
 
 # Add colors for i3blocks
 if cpu_usage >= cpu_usage_crit:

@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+from os import popen
+
+used_memory = popen("nvidia-smi --query-gpu=memory.used --format=csv,noheader").read()
+temp = popen("nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader").read()
+#usage = popen("nvidia-smi --query-gpu=power.draw --format=csv,noheader").read()
+fan_speed = popen("nvidia-smi --query-gpu=fan.speed --format=csv,noheader").read()
+
+used_memory = used_memory.replace("\n", "")
+temp = temp.replace("\n", "")
+fan_speed = fan_speed.replace("\n", "")
+
+print(used_memory + " VRAM used")
+print("GPU: " + temp + ".0 C")
+#print usage
+print("GPU fan: " + fan_speed)

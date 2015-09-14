@@ -1,0 +1,42 @@
+#!/usr/bin/python
+
+from os import popen
+import re
+
+rpm_max = 1600
+rpm_min = 600
+rpm_crit = rpm_max - 100
+rpm_warn = rpm_max - 500
+rpm_ok = rpm_max / 2
+
+raw_data = popen("sensors | grep fan2").read()
+p = re.compile('\d+')
+results = p.findall(raw_data)
+rpm = results[1]
+
+print(rpm + " RPM (CPU fan)\n")
+
+rpm = int(rpm)
+
+# Add colors for i3blocks
+if rpm <= rpm_ok and rpm > rpm_min:
+    print("#00CC00") # Green
+#    print "case 1"
+elif rpm >= rpm_warn and rpm < rpm_crit:
+    print("#FFCC00") # Orange
+#    print "case 2"
+elif rpm >= rpm_crit:
+    print("#FF0000") # Red
+#    print "case 3"
+elif rpm <= rpm_min:
+    print("#0000FF") # Blue
+#    print "case 4"
+else:
+    print("#00CC00") # Green
+#    print "case 5"
+
+#print rpm_max
+#print rpm_min
+#print rpm_crit
+#print rpm_warn
+#print rpm_ok

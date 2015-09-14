@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+# Import
+from os import popen
+import re
+
+total_ram = 4.0 # In GB
+ram_usage_crit = total_ram - 0.5
+ram_usage_warn = total_ram - 2
+
+raw_data = popen("nvidia-smi --query-gpu=memory.used --format=csv,noheader").read()
+data = raw_data.replace("\n","")
+
+print(data + " VRAM used\n")
+
+q = re.compile('\d+,?\d+')
+digits_only = q.match(data).group()
+result_float = float(digits_only.replace(',','.'))
+
+#print result_float
+
+# Add colors for i3blocks
+if result_float >= ram_usage_crit and result_float < total_ram:
+    print("#FF0000") # Red
+elif result_float >= ram_usage_warn and result_float < ram_usage_crit:
+    print("#FFCC00") # Orange
+else:
+    print("#00CC00") # Green

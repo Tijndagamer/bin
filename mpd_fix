@@ -1,5 +1,5 @@
 #!/bin/bash
 
 sudo killall mpd
-sleep 5
+sleep 2
 mpd
