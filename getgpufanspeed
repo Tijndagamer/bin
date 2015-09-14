@@ -1,0 +1,29 @@
+#!/usr/bin/python
+
+from os import popen
+import re
+
+rpm_crit = 85
+rpm_warn = 75
+rpm_ok = 30
+
+raw_data = popen("nvidia-smi --query-gpu=fan.speed --format=csv,noheader").read()
+data = raw_data.replace("\n", "")
+
+p = re.compile('\d+')
+results = p.findall(data)
+data = int(results[0])
+
+if data <= rpm_ok:
+    print("off (GPU fans) \n")
+    print("#19D1FF") # Blue
+elif data > rpm_ok and data < rpm_warn:
+    print(data + " (GPU fans)\n")
+    print("#00CC00") # Green
+elif data >= rpm_warn and data < rpm_crit:
+    print(data + " (GPU fans)\n")
+    print("#FFCC00") # Orange
+elif data >= rpm_crit:
+    print(data + " (GPU fans)\n")
+    print("#FF0000") # Red
+

@@ -5,6 +5,7 @@ from os import popen
 
 cpu_usage_crit = 85.0
 cpu_usage_warn = 55.0
+cpu_usage_low = 15.0
 
 # Basically the whole program, or at least the important bit.
 raw_data = popen('mpstat 1 1').read()
@@ -18,5 +19,7 @@ if cpu_usage >= cpu_usage_crit:
     print("#FF0000") # Red
 elif cpu_usage >= cpu_usage_warn and cpu_usage < cpu_usage_crit:
     print("#FFCC00") # Orange
+elif cpu_usage <= cpu_usage_low:
+    print("#19D1FF") # Blue
 else:
     print("#00CC00") # Green

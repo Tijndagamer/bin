@@ -26,6 +26,6 @@ if temp >= temp_warn and temp < temp_crit:
 elif temp >= temp_crit:
     print("#FF000") # Red
 elif temp <= temp_cold:
-    print("#0000FF") # Blue
+    print("#19D1FF") # Blue
 else:
     print("#00CC00") # Green

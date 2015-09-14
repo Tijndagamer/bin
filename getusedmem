@@ -7,6 +7,7 @@ import re
 total_ram = 8.0 # In GB
 ram_usage_crit = total_ram - 0.5
 ram_usage_warn = total_ram - 2
+ram_usage_low = total_ram / 4
 
 raw_data = os.popen("free -h").read()
 data_list = raw_data.split(' ')
@@ -25,5 +26,7 @@ if result_float >= ram_usage_crit and result_float < total_ram:
     print("#FF0000") # Red
 elif result_float >= ram_usage_warn and result_float < ram_usage_crit:
     print("#FFCC00") # Orange
+elif result_float <= ram_usage_low:
+    print("#19D1FF") # Blue
 else:
     print("#00CC00") # Green
