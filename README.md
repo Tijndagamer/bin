@@ -1,4 +1,6 @@
 # bin
 My ~/bin directory
 
-Please note that most of these scripts are just crappy scripts I wrote in <15 minutes.
+Here are all my crappy, unoptimized, uncommented scripts. Have fun.
+
+PS: I'm not going to merge any optimizing pull requests.
