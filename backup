@@ -3,23 +3,19 @@
 # The backup locations
 etc_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/etc"
 home_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/home"
-#site_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/www"
 log_backup_dir="file:///mnt/nas_hdd1/Backup/Martijn/LinuxDesktop/logs"
 
 # The dirs to be backed up
 etc_dir="/etc"
 home_dir="/home/martijn"
-#site_dir="/var/www"
 log_dir="/var/log"
 
 # Actually doing the backing up
-duplicity incr $etc_dir $etc_backup_dir --no-encryption --volsize 1024
-duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 1024
-#duplicity incr $site_dir $site_backup_dir --no-encryption --volsize 1024
-duplicity incr $log_dir $log_backup_dir --no-encryption --volsize 1024
+duplicity incr $etc_dir $etc_backup_dir --no-encryption --volsize 4096 --full-if-older-than 2W
+duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 4096 --full-if-older-than 1M
+duplicity incr $log_dir $log_backup_dir --no-encryption --volsize 4096 --full-if-older-than 2W
 
 # First time
 #duplicity full $etc_dir $etc_backup_dir --no-encryption --volsize 1024
 #duplicity full $home_dir $home_backup_dir --no-encryption --volsize 1024
-#duplicity full $site_dir $site_backup_dir --no-encryption --volsize 1024`
 #duplicity full $log_dir $log_backup_dir --no-encryption --volsize 1024
