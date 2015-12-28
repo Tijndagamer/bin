@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+import os
+
+raw_vol = os.popen("mpc volume").read()
+raw_song = os.popen("mpc current").read()
+paused = os.popen("mpc | grep paused").read()
+
+vol = raw_vol.replace("volume: ","")
+vol = vol.replace("\n","")
+
+if paused != "":
+    song = "[paused]"
+else:
+    song = raw_song.replace("\n","")
+
+print song + " (" + vol + ")"

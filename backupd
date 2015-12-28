@@ -4,5 +4,6 @@ while :
 do
     /home/martijn/bin/backup
     echo "Sleeping"
+    echo $(date)
     sleep 10800
 done
