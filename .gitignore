@@ -8,7 +8,6 @@ copy-console
 *.pyc
 colortest
 github_fix
-tmux_colors
 server_fix
 mtp_path_getter
 gitlab_fix
