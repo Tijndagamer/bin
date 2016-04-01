@@ -1,0 +1,26 @@
+#!/usr/bin/python
+
+import os
+from time import sleep
+
+print("Renamer for 'ssxeey-name.extension' format")
+dir = raw_input("dir = ")
+season = raw_input("season = ")
+sepx = raw_input("seperator (x in ssxeey) = ")
+sepy = raw_input("seperator (y in ssxeey) = ")
+extension = raw_input("ext = ")
+
+filenames = os.listdir(dir)
+
+for filename in filenames:
+    filename_n = filename.lower()
+    split_name = filename_n.split(sepx)
+    split_name_2 = split_name[1].split(sepy)
+
+    episode = split_name_2[0]
+    new_file_name = "S" + season + "E" + episode + extension
+    print new_file_name
+    
+    print(filename + "              " + dir + "/" + new_file_name)
+    os.rename(filename, dir + "/" + new_file_name)
+    sleep(0.5)
