@@ -1,0 +1,41 @@
+#!/usr/bin/python
+
+import os
+from time import sleep
+import re
+
+dir = "./"
+#dir = raw_input("dir = ")
+#extension = raw_input("ext = ")
+extension = ".flac"
+
+filenames = os.listdir(dir)
+
+def remove_shit(string):
+    string = string.replace("Track name","")
+    string = string.replace("Performer","")
+    string = string.replace(":","")
+    string = string.strip()
+    return string
+
+for filename in filenames:
+    if filename[len(filename) -4:len(filename)] == "flac":
+        #print(filename + " is flac file")
+        raw_info = os.popen("mediainfo " + dir + filename).read()
+        #print raw_info
+        track_reg = re.compile("Track name .*")
+        track_name = track_reg.findall(raw_info)[0]
+        track_name = remove_shit(track_name)
+        
+        artist_reg = re.compile("Performer .*")
+        artist = artist_reg.findall(raw_info)[0]
+        artist = remove_shit(artist)
+        #print artist + track_name
+        new_filename = artist + " - " + track_name + extension
+        print new_filename
+        os.rename(dir + "/" + filename, dir + "/" + new_filename)
+        #print(dir + "/" + filename + "," + dir + "/" + new_filename)
+        sleep(0.5)
+    else:
+        pass
+        #print(filename + " not a flac file, skipping...")
