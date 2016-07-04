@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-# Import
 import os
+import sys
 import re
 
 total_ram = 8.0 # In GB
@@ -15,18 +15,20 @@ p = re.compile('\d*,?\d+[BKMG]')
 results = p.findall(str(data_list))
 #print str(results)
 
-print(results[len(results) - 5] + " RAM used\n")
+print(results[len(results) - 5] + " RAM used")
 
 q = re.compile('\d+,?\d+')
 digits_only = q.match(results[len(results) - 5]).group()
 result_float = float(digits_only.replace(',','.'))
 
 # Add colors for i3blocks
-if result_float >= ram_usage_crit and result_float < total_ram:
-    print("#FF0000") # Red
-elif result_float >= ram_usage_warn and result_float < ram_usage_crit:
-    print("#FFCC00") # Orange
-elif result_float <= ram_usage_low:
-    print("#19D1FF") # Blue
-else:
-    print("#00CC00") # Green
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--i3blocks":
+        if result_float >= ram_usage_crit and result_float < total_ram:
+            print("\n#FF0000") # Red
+        elif result_float >= ram_usage_warn and result_float < ram_usage_crit:
+            print("\n#FFCC00") # Orange
+        elif result_float <= ram_usage_low:
+            print("\n#19D1FF") # Blue
+        else:
+            print("\n#00CC00") # Green

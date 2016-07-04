@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-# Import
 from os import popen
+import sys
 from RemoveAllChars import OnlyInts
 
 temp_crit = 750
@@ -14,18 +14,19 @@ data = raw_data.replace('\n', '')
 data = data.replace('+', '')
 data_list = data.split(' ')
 
-# Print final temp
-print("CPU: " + data_list[4] + "\n")
+print("CPU: " + data_list[4])
 
 # Remove all the non-int characters from dataList[4]
 temp = int(OnlyInts(data_list[4]))
 
-# Add colors for i3blocks
-if temp >= temp_warn and temp < temp_crit:
-    print("#FFCC00") # Orange
-elif temp >= temp_crit:
-    print("#FF000") # Red
-elif temp <= temp_cold:
-    print("#19D1FF") # Blue
-else:
-    print("#00CC00") # Green
+# Add colors for i3blocks if asked for
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--i3blocks":
+        if temp >= temp_warn and temp < temp_crit:
+            print("\n#FFCC00") # Orange
+        elif temp >= temp_crit:
+            print("\n#FF000") # Red
+        elif temp <= temp_cold:
+            print("\n#19D1FF") # Blue
+        else:
+            print("\n#00CC00") # Green

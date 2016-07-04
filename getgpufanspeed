@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from os import popen
+import sys
 import re
 
 rpm_crit = 85
@@ -15,15 +16,21 @@ results = p.findall(data)
 data = int(results[0])
 
 if data <= rpm_ok:
-    print("off (GPU fans) \n")
-    print("#19D1FF") # Blue
+    print("off (GPUfans)")
 elif data > rpm_ok and data < rpm_warn:
-    print(data + " (GPU fans)\n")
-    print("#00CC00") # Green
+    print(str(data) + " (GPU fans)")
 elif data >= rpm_warn and data < rpm_crit:
-    print(data + " (GPU fans)\n")
-    print("#FFCC00") # Orange
+    print(str(data) + " (GPU fans)")
 elif data >= rpm_crit:
-    print(data + " (GPU fans)\n")
-    print("#FF0000") # Red
+    print(str(data) + " (GPU fans)")
 
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--i3blocks":
+        if data <= rpm_ok:
+            print("\n#19D1FF") # Blue
+        elif data > rpm_ok and data < rpm_warn:
+            print("\n#00CC00") # Green
+        elif data >= rpm_warn and data < rpm_crit:
+            print("\n#FFCC00") # Orange
+        elif data >= rpm_crit:
+            print("\n#FF0000") # Red

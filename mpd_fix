@@ -1,6 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
-#sudo killall mpd
-#sleep 1
 mpd
 ncmpcpp
