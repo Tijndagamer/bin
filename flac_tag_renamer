@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# Rename media files based on their metadata.
+
 import os
 from time import sleep
 import re

@@ -2,7 +2,7 @@
 
 import os
 
-time = os.popen("date '+%H:%M %d-%m-%Y'").read()
+time = os.popen("date '+%Y-%m-%d %H:%M'").read()
 raw_data = os.popen("date +%H%M%S").read()
 raw_data = raw_data.replace("\n","")
 color = "#" + raw_data

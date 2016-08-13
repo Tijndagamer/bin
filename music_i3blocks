@@ -10,8 +10,9 @@ vol = raw_vol.replace("volume: ","")
 vol = vol.replace("\n","")
 
 if paused != "":
-    song = "[paused]"
+    #song = "[paused]"
+    pass
 else:
     song = raw_song.replace("\n","")
+    print song + " (" + vol + ")"
 
-print song + " (" + vol + ")"
