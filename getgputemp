@@ -1,12 +1,11 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import re
 import sys
 from os import popen
 
-#degree_symbol = u"\u00b0"
-degree_symbol = " "
-#degree_symbol = u"\u2103"
+degree_symbol = "°"
 temp_warn = 90
 temp_crit = 75
 temp_cold = 50
