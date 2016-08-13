@@ -1,0 +1,54 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from os import popen
+import sys
+#import re
+
+temp_really_hot = 35
+temp_hot = 30
+temp_cold = 5
+temp_freezing = 0
+
+red = "#FF0000"
+orange = "#FFCC00"
+green = "#00CC00"
+light_blue = "#19D1FF"
+blue = "#0000FF"
+
+degree_symbol = "°"
+# Uncomment this is the script doesn't work in i3blocks with the degree symbol
+#degree_symbol = ' '
+
+# Should be something like this:
+#    Weather:   Conditions: 73 F (23 C) - Mostly Cloudy Time: August 13, 3:31 PM CEST
+raw_data = popen("inxi -w -c 0").read()
+raw_data_list = raw_data.split(' ')
+
+temp = raw_data_list[6]
+temp = temp.replace('(','')
+
+# Comma to prevent newline
+print(temp + degree_symbol + "C,"),
+
+# First split removes the temperature information, second split removes the time.
+# lstrip and rstrip to remove the leading and trailing whitespace.
+weather_desc = raw_data.split('-')[1].split('Time')[0].lstrip().rstrip()
+print(weather_desc)
+
+# Add some colors for i3blocks (if wanted)
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--i3blocks":
+        temp = int(temp)
+        if temp >= temp_hot and temp < temp_really_hot:
+            print("\n" + orange)
+        elif temp < temp_hot and temp > temp_cold:
+            print("\n" + green)
+        elif temp <= temp_cold and temp > temp_freezing:
+            print("\n" + light_blue)
+        elif temp <= temp_freezing:
+            print("\n" + blue)
+        elif temp >= temp_really_hot:
+            print("\n" + red)
+        else:
+            print("\n" + green)
