@@ -4,7 +4,6 @@ connectserver
 connectserver
 arduino_ide
 android_studio
-copy-console
 *.pyc
 colortest
 github_fix
@@ -19,5 +18,4 @@ minecraft
 feed_the_beast
 esplorer
 hdd_temp_server
-pixellated_screenlock
 steam_pol
