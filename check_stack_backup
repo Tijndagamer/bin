@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -f /tmp/stack_backup ];
+then
+    echo "Backupping to STACK"
+    echo ""
+    echo "#FFCC00"
+fi

@@ -1,0 +1,15 @@
+#!/bin/sh
+# Script to backup important files to STACK cloud storage
+
+# Mount the remote WebDAV fs
+mount /mnt/stack_backup
+
+# To make it easy to see if it's running
+echo "ttt" >> /tmp/stack_backup
+echo "Compressing & writing to /mnt/stack_backup ($(date '+%Y-%m-%d_%H:%M:%S'))"
+tar Jcvf /mnt/stack_backup/Documenten$(date '+%Y-%m-%d_%H:%M:%S').tar.xz /home/martijn/Documenten
+
+# Unmount (since we're done)
+umount /mnt/stack_backup
+rm /tmp/stack_backup
+echo "Done. ($(date '+%Y-%m-%d_%H:%M:%S'))"
