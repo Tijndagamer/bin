@@ -15,7 +15,7 @@ p = re.compile('\d*,?\d+[BKMG]')
 results = p.findall(str(data_list))
 #print str(results)
 
-print(results[len(results) - 5] + " RAM used")
+print(results[2] + " RAM used")
 
 q = re.compile('\d+,?\d+')
 digits_only = q.match(results[len(results) - 5]).group()
