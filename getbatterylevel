@@ -1,35 +1,40 @@
 #!/usr/bin/python
 
 import os
+import sys
 
-# Get the battery percentage
-rawData = os.popen("upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage").read()
-data = rawData.replace('\n', '')
-dataList = data.split(' ')
+# Color definitions for i3blocks
+red = "#FF0000"
+orange = "#FFCC00"
+green = "#00CC00"
 
-# Get the battery status
-rawData = os.popen("upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state").read()
-rawData = rawData.replace('\n', '')
-dataList2 = rawData.split(' ')
+charge_crit = 15
+charge_warn = 30
 
-charging_state_str = dataList2[len(dataList2) - 1]
-charging_state = False
+charging = False
+data = ""
 
-if charging_state_str == "discharging":
-    charging_state = False
-else:
-    charging_state = True
+raw_data = os.popen("acpi -b").read().strip("Battery 0:").strip('\n')
 
-if charging_state == False:
-    print(dataList[len(dataList)-1] + "(bat)\n")
-else:
-    print(dataList[len(dataList)-1] + " (AC)\n")
+if "Charging" in raw_data:
+    charging = True
+    data = raw_data.replace("Charging, ", '')
+    print(data)
+elif "Discharging" in raw_data:
+    charging = False
+    data = raw_data.replace("Discharging, ",'')
+    print(data)
 
-level_int = int(dataList[len(dataList)-1].replace('%',''))
-
-if level_int < 16 and charging_state == False:
-    print("#FF000")
-elif level_int > 39 and charging_state == False or charging_state == True:
-    print("#00CC00")
-elif level_int > 15 and level_int < 40 and charging_state == False:
-    print("#FFCC00")
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--i3blocks":
+        print('')
+        if charging:
+            print(green)
+        else:
+            charge = int(data[:2])
+            if charge > charge_warn:
+                print(green)
+            elif charge <= charge_warn and charge > charge_crit:
+                print(orange)
+            elif charge < charge_crit:
+                print(red)
