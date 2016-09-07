@@ -14,11 +14,11 @@ data_list = raw_data.split(' ')
 p = re.compile('\d*,?\d+[BKMG]')
 results = p.findall(str(data_list))
 #print str(results)
-
-print(results[2] + " RAM used")
+used_mem = results[1]
+print(used_mem + " RAM used")
 
 q = re.compile('\d+,?\d+')
-digits_only = q.match(results[len(results) - 5]).group()
+digits_only = q.match(used_mem).group()
 result_float = float(digits_only.replace(',','.'))
 
 # Add colors for i3blocks
