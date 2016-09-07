@@ -23,7 +23,7 @@ if "Charging" in raw_data:
 elif "Discharging" in raw_data:
     charging = False
     data = raw_data.replace("Discharging, ",'')
-    print(data)
+    print(data[:7] + "h remaining")
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "--i3blocks":
