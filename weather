@@ -17,13 +17,16 @@ light_blue = "#19D1FF"
 blue = "#0000FF"
 
 degree_symbol = "°"
-# Uncomment this is the script doesn't work in i3blocks with the degree symbol
+# Uncomment this if the script doesn't work in i3blocks with the degree symbol
 #degree_symbol = ' '
 
 # Should be something like this:
 #    Weather:   Conditions: 73 F (23 C) - Mostly Cloudy Time: August 13, 3:31 PM CEST
 raw_data = popen("inxi -w -c 0").read()
+raw_data = raw_data.replace('(','')
+raw_data = raw_data.replace(')','')
 raw_data_list = raw_data.split(' ')
+#print raw_data_list
 
 temp = raw_data_list[6]
 temp = temp.replace('(','')
@@ -33,7 +36,10 @@ print(temp + degree_symbol + "C,"),
 
 # First split removes the temperature information, second split removes the time.
 # lstrip and rstrip to remove the leading and trailing whitespace.
-weather_desc = raw_data.split('-')[1].split('Time')[0].lstrip().rstrip()
+if int(temp) < 0:
+    weather_desc = raw_data.split('-')[2].split('Time')[0].lstrip().rstrip()
+else:
+    weather_desc = raw_data.split('-')[1].split('Time')[0].lstrip().rstrip()
 print(weather_desc)
 
 # Add some colors for i3blocks (if wanted)
