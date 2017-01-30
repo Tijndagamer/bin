@@ -12,7 +12,7 @@ log_dir="/var/log"
 
 # Actually doing the backing up
 duplicity incr $etc_dir $etc_backup_dir --no-encryption --volsize 4096 --full-if-older-than 2W
-duplicity incr $home_dir $home_backup_dir --no-encryption --volsize 4096 --full-if-older-than 1M
+duplicity incr --exclude /home/martijn/.cache/ --no-encryption --volsize 4096 --full-if-older-than 1M $home_dir $home_backup_dir
 duplicity incr $log_dir $log_backup_dir --no-encryption --volsize 4096 --full-if-older-than 2W
 
 # First time
