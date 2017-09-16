@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+"""
+Made by Martijn (MrTijn/Tijndagamer)
+Copyright (c) 2017
+Licensed under the MIT license.
+"""
+
+import json
+import urllib.request
+import sys
+
+fiat = "USD"
+fiat_symbol = {"USD" : '$', "EUR" : '€', "NOK" : "NOK "}
+try:
+    if sys.argv[1] in fiat_symbol:
+        fiat = sys.argv[1]
+    else:
+        print("Error, unknown fiat specified")
+        exit(-1)
+except IndexError:
+    print("No fiat specified, using default (USD)")
+
+result = json.loads(urllib.request.urlopen("https://api.coindesk.com/v1/bpi/currentprice/" + fiat + ".json").read().decode("utf-8"))
+fiat_per_btc = result["bpi"][fiat]["rate_float"]
+print(fiat_symbol[fiat] + str(fiat_per_btc) + "/BTC")
