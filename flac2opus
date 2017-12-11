@@ -4,3 +4,4 @@
 
 for f in *.flac; do
     avconv -i "$f" -map 0:a -codec:a opus -b:a 512k -vbr on "${f[@]/%flac/opus}"
+done
