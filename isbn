@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Remove all dashes from an ISBN
+
+echo "$1" | sed "s/-//g"
