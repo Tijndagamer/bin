@@ -1,4 +1,4 @@
 #!/bin/bash
 
 sudo cryptsetup luksOpen $1 crypt-usb
-sudo mount /dev/mapper/crypt-usb /mnt/usb
+sudo mount /dev/mapper/crypt-usb /mnt/crypt

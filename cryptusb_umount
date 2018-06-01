@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo umount /mnt/usb
+sudo umount /mnt/crypt
 sudo cryptsetup close /dev/mapper/crypt-usb
