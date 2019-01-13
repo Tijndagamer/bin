@@ -8,16 +8,19 @@
 import os
 import sys
 
-filename = sys.argv[1]
-print(filename)
+files = sys.argv
+files.pop(0)
 
-filehash = os.popen("sha1sum " + filename).read().split(' ')[0]
-extension = filename.split('.')[-1]
-print(filehash)
+if len(files) <= 0:
+    print("No arguments given.")
+    sys.exit(-1)
 
-new_filename = filehash + "." + extension
-print(new_filename)
+for filename in files:
+    filehash = os.popen("sha1sum " + filename).read().split(' ')[0]
+    extension = filename.split('.')[-1]
 
-mvcmd = "mv " + filename + " " + new_filename
-print(mvcmd)
-os.popen(mvcmd)
+    new_filename = filehash + "." + extension
+
+    mvcmd = "mv " + filename + " " + new_filename
+    print(mvcmd)
+    os.popen(mvcmd)
