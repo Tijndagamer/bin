@@ -7,3 +7,7 @@ if [ -z $size ]; then
 fi
 echo "$size"
 sudo mount -t tmpfs -o size=$size tmpfs /mnt/ramdisk
+
+sudo mkdir /mnt/ramdisk/martijn
+sudo chown martijn:martijn /mnt/ramdisk/martijn
+setfacl -R -d -m o::--- /mnt/ramdisk/martijn
