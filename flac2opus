@@ -3,5 +3,5 @@
 # Script to convert all flac files in current folder to opus (512k bitrate)
 
 for f in *.flac; do
-    avconv -i "$f" -map 0:a -codec:a opus -b:a 512k -vbr on "${f[@]/%flac/opus}"
+    ffmpeg -i "$f" -map 0:a -codec:a opus -b:a 512k -vbr on "${f[@]/%flac/opus}"
 done

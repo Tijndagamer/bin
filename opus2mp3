@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Script to convert all flac files in current folder to opus (512k bitrate)
+
+for f in *.opus; do
+    ffmpeg -i "$f" -map 0:a -codec:a libmp3lame -ab 320k "${f[@]/%opus/mp3}"
+done

@@ -4,14 +4,22 @@ import os
 import time
 import sys
 
-#dir = raw_input("dir =")
 dir = sys.argv[1]
+
+extension = ".mp3"
+try:
+    extension = sys.argv[2]
+except:
+    pass
+
+print("dir:\t" + dir)
+print("extension:\t" + extension)
 
 def main():
     files = os.listdir(dir)
     for file in files:
-        newname = file + ".mp3"
-        os.popen('avconv -i "' + dir + '/' + file + '" "' + newname + '" -loglevel quiet')
+        newname = file + extension
+        os.popen('ffmpeg -i "' + dir + '/' + file + '" -vn -acodec copy "' + newname + '" -loglevel quiet')
         time.sleep(0.5)
     print("Done!")
 
