@@ -1,11 +1,13 @@
 #!/bin/sh -e
 
+RESOLUTION=$(xdpyinfo | awk '/dimensions/{print $2}')
+
 # Take a screenshot
 scrot /tmp/screen_locked.png -q 50 -m
 
 # Pixellate it 10x
 convert -scale 10% -scale 100% /tmp/screen_locked.png /tmp/screen_locked.png
-convert /tmp/screen_locked.png -resize 1280x900 /tmp/screen_locked.png
+convert /tmp/screen_locked.png -resize $RESOLUTION /tmp/screen_locked.png
 
 # Lock the screen using the pixellated image.
 i3lock -i /tmp/screen_locked.png -f
