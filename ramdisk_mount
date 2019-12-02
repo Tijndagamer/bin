@@ -1,11 +1,11 @@
 #!/bin/bash
 
 size=$1
-echo "$size"
 if [ -z $size ]; then
+    echo "No custom size specified..."
     size="1024M"
 fi
-echo "$size"
+echo "Using size: $size"
 sudo mount -t tmpfs -o size=$size tmpfs /mnt/ramdisk
 
 sudo mkdir /mnt/ramdisk/martijn
