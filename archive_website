@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Archiving $1..."
+tmux new -s webarchiver "wget -mpck --wait 1 $1"
