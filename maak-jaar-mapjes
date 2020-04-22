@@ -1,0 +1,14 @@
+#!/bin/bash
+
+mkdir 01-januari
+mkdir 02-februari
+mkdir 03-maart
+mkdir 04-april
+mkdir 05-mei
+mkdir 06-juni
+mkdir 07-juli
+mkdir 08-augustus
+mkdir 09-september
+mkdir 10-oktober
+mkdir 11-november
+mkdir 12-december
