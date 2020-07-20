@@ -9,7 +9,7 @@ temp_warn = 550
 temp_cold = 400
 
 # Get the data
-raw_data = popen("sensors | grep 'Physical id 0:'").read()
+raw_data = popen("sensors | grep 'Package id 0:'").read()
 data = raw_data.replace('\n', '')
 data = data.replace('+', '')
 data_list = data.split(' ')
