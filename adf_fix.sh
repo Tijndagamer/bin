@@ -23,6 +23,12 @@
 # Available under the terms of the MIT license.
 #
 
+function fail {
+    echo "$1"
+    exit 1
+}
+
+# Expect exactly 3 arguments
 if [ "$#" -ne 3 ]; then
     echo "Usage: $0 [scan1.pdf] [scan2.pdf] [output.pdf]"
     exit
@@ -31,32 +37,30 @@ fi
 CURRENT_DIR=$(pwd)
 TEMP_DIR=$(mktemp -d)
 
-echo $TEMP_DIR
+cp "$1" "$TEMP_DIR"
+cp "$2" "$TEMP_DIR"
 
-cp $1 $TEMP_DIR
-cp $2 $TEMP_DIR
+cd "$TEMP_DIR" || fail "Could not move to temporary directory $TEMP_DIR"
 
-cd $TEMP_DIR
+# Assume that both pdf's have the same length, since a page always has 2 sides.
+PAGE_COUNT=$(pdfinfo "$1" | grep 'Pages:' | grep -o '[0-9]')
 
-PAGE_COUNT=$(pdfinfo $1 | grep 'Pages:' | grep -o '[0-9]')
-echo $PAGE_COUNT
+pdfseparate "$1" "SCAN1_%d.pdf"
+pdfseparate "$2" "SCAN2_%d.pdf"
 
-pdfseparate $1 "SCAN1_%d.pdf"
-pdfseparate $2 "SCAN2_%d.pdf"
-
-rm $1
-rm $2
+rm "$1"
+rm "$2"
 
 # Initialize command string
 UNITE_COMMAND="pdfunite "
 
 ITERATE_COUNT=1
-while [ $ITERATE_COUNT -le $PAGE_COUNT ]
+while [ $ITERATE_COUNT -le "$PAGE_COUNT" ]
 do
     let INVERTED_PAGE_COUNT=$PAGE_COUNT-$ITERATE_COUNT+1
     UNITE_COMMAND="${UNITE_COMMAND} SCAN1_$ITERATE_COUNT.pdf SCAN2_$INVERTED_PAGE_COUNT.pdf"
 
-    ITERATE_COUNT=$(( $ITERATE_COUNT + 1 ))
+    ITERATE_COUNT=$(( ITERATE_COUNT + 1 ))
 done
 
 # Append output name to pdfunite command
@@ -65,10 +69,10 @@ UNITE_COMMAND="${UNITE_COMMAND} $3"
 $UNITE_COMMAND
 
 # Go back to where the command was executed
-cd $CURRENT_DIR
+cd "$CURRENT_DIR" || fail "Could not move back to $CURRENT_DIR"
 
 # Copy output file to where we were
-cp $TEMP_DIR/$3 ./
+cp "$TEMP_DIR"/"$3" ./
 
 # Delete temporary directory
-rm -rf $TEMP_DIR
+rm -rf "$TEMP_DIR"
