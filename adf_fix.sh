@@ -43,7 +43,7 @@ cp "$2" "$TEMP_DIR"
 cd "$TEMP_DIR" || fail "Could not move to temporary directory $TEMP_DIR"
 
 # Assume that both pdf's have the same length, since a page always has 2 sides.
-PAGE_COUNT=$(pdfinfo "$1" | grep 'Pages:' | grep -o '[0-9]')
+PAGE_COUNT=$(pdfinfo "$1" | grep 'Pages:' | grep --only-matching --perl-regexp '[0-9]+')
 
 pdfseparate "$1" "SCAN1_%d.pdf"
 pdfseparate "$2" "SCAN2_%d.pdf"
