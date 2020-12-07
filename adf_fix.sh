@@ -23,6 +23,11 @@
 # Available under the terms of the MIT license.
 #
 
+set -e
+set -u
+set -f
+set -o pipefail
+
 function fail {
     echo "$1"
     exit 1
