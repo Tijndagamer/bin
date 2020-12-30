@@ -8,8 +8,8 @@ import sys
 mp3_format = "libmp3lame -ab 128k"
 
 def ConvertAudio(file, new_file, new_format):
-#    print("avconv -i " + file + " -vcodec copy -acodec " + new_format + " " + new_file)
-    os.popen("avconv -i " + file + " -vcodec copy -acodec " + new_format + " " + new_file)
+#    print("ffmpeg -i " + file + " -vcodec copy -acodec " + new_format + " " + new_file)
+    os.popen("ffmpeg -i " + file + " -vcodec copy -acodec " + new_format + " " + new_file)
 
 def WholeDir(dir, sep, index, extension, new_format):
     files = os.listdir(dir)

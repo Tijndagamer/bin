@@ -11,7 +11,7 @@ def main():
     files = os.listdir(dir)
     for file in files:
         newname = dir + "/downsampled/" + file
-        os.popen("avconv -i " + dir + "/" + file + " -s:0 1280x720 -acodec copy -scodec copy " + newname)
+        os.popen("ffmpeg -i " + dir + "/" + file + " -s:0 1280x720 -acodec copy -scodec copy " + newname)
         time.sleep(0.5)
     print("Done!")
 
