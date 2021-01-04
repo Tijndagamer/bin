@@ -1,4 +1,5 @@
 #!/bin/bash
 
 echo "Archiving $1..."
-tmux new -s webarchiver "wget -mpck --wait 1 $1"
+#tmux new -s webarchiver "wget --mirror --continue --convert-links --page-requisites --no-parent --adjust-extension "$1""
+tmux new -s webarchiver "wget --mirror --continue --convert-links --page-requisites --no-parent "$1""
