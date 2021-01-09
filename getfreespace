@@ -7,8 +7,12 @@ import re
 free_space_crit = 10
 free_space_warn = 30
 
+if len(sys.argv) < 2:
+    print("Usage: {} [mount point]".format(sys.argv[0]))
+    sys.exit(-1)
+
 # Get the raw data and split everything
-raw_data = os.popen("df -h /").read()
+raw_data = os.popen("df -h {}".format(sys.argv[1])).read()
 data_list = raw_data.split(' ')
 
 # Use a regex to only have digit*,digit*G
@@ -16,15 +20,15 @@ p = re.compile('\d*,?\d+G')
 results = p.findall(str(data_list))
 
 # Print results
-print(results[len(results) - 1] + " free")
+print(results[len(results) - 1] + " free [{}]".format(sys.argv[1]))
 
 # Use a regex to only have digits in the results
 q = re.compile('\d+')
 result_int = q.findall(results[len(results) - 1])
 
 # Add colors for i3blocks
-if len(sys.argv) > 1:
-    if sys.argv[1] == "--i3blocks":
+if len(sys.argv) > 2:
+    if sys.argv[2] == "--i3blocks":
         if result_int > free_space_warn:
             print("\n#00CC00") # Green
         elif result_int <= free_space_warn and resultint > free_space_crit:
